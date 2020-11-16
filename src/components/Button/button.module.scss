@@ -1,0 +1,27 @@
+button {
+    background-color: yellowgreen;
+    font-weight: 500;
+    padding: 15px;
+    border: 1px solid transparent;
+    box-shadow: 0px 4px 31px rgba(0, 0, 0, 0.15);
+    margin-left: 15px;
+    transition: background-color 0.2s;
+    border-radius: 8px;
+    min-width: 30px;
+    font-weight: 700;
+
+    &:hover {
+        background-color:yellow;
+        border: 1px solid transparent;
+        cursor: pointer;
+        outline: none;
+    }
+}
+
+.rectangle {
+    text-align: center;
+    padding: 20px;
+    width: 100px;
+    height: 100px;
+    color: black;
+}
