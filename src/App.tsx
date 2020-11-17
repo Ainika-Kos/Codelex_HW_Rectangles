@@ -24,6 +24,27 @@ const ColorApp = () => {
     return s.color !== '';
   };
 
+
+  const addColorHandler = () => {
+    if (inputColor && realColor(inputColor)) {
+      if (rectangles.some(({ color }) => color === inputColor)) {
+        const index = rectangles
+          .findIndex(({ color }) => color === inputColor);
+        rectangles[index].amount += 1;
+      } else {
+        setRectangles([
+          ...rectangles,
+          {
+            id: rectangles.length + 1,
+            amount: 1,
+            color: inputColor,
+          }
+        ]);
+      }
+    }
+    setInputColor('');
+  };
+
   const deleteRectangleHandler = (id: number) => {
     const index = rectangles.findIndex((item) => item.id === id);
     const newRectangles = [...rectangles];
@@ -43,25 +64,7 @@ const ColorApp = () => {
         />
         <Button
           text="Add"
-          onClick={() => {
-            if (inputColor && realColor(inputColor)) {
-              if (rectangles.some(({ color }) => color === inputColor)) {
-                const index = rectangles
-                  .findIndex(({ color }) => color === inputColor);
-                rectangles[index].amount += 1;
-              } else {
-                setRectangles([
-                  ...rectangles,
-                  {
-                    id: rectangles.length + 1,
-                    amount: 1,
-                    color: inputColor,
-                  }
-                ]);
-              }
-            }
-            setInputColor('');
-          }}
+          onClick={addColorHandler}
         />
       </div>
 
