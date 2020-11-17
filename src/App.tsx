@@ -13,8 +13,17 @@ type Rectangle = {
 const ColorApp = () => {
   const [rectangles, setRectangles] = useState<Rectangle[]>([]);
   const [inputColor, setInputColor] = useState('');
-  const [showAmount, setShowAmount] = useState(true);
 
+  const convert = (input: string) => {
+    return input.split('').map((item) => item.toLocaleLowerCase()).join('');
+  };
+
+  const deleteRectangleHandler = (id: number) => {
+    const index = rectangles.findIndex((item) => item.id === id);
+    const newRectangles = [...rectangles];
+    newRectangles.splice(index, 1);
+    setRectangles(newRectangles);
+  };
 
   return (
     <div className="colorApp">
@@ -24,7 +33,7 @@ const ColorApp = () => {
           className="input"
           value={inputColor}
           placeholder="Enter your color..."
-          onChange={(e) => setInputColor(e.target.value)}
+          onChange={(e) => setInputColor(convert(e.target.value))}
         />
         <Button
           text="Add"
@@ -56,16 +65,13 @@ const ColorApp = () => {
             key={id}
             className="rectangle"
             style={{ backgroundColor: color }}
+            role="button"
+            tabIndex={0}
+            onClick={() => deleteRectangleHandler(id)}
+            onKeyDown={() => deleteRectangleHandler(id)}
           >
             {amount > 1 &&
-              <div
-                role="button"
-                tabIndex={0}
-                onClick={() => setShowAmount(false)}
-                onKeyDown={() => setShowAmount(false)}
-              >
-                <div style={{ display: showAmount ? 'block' : 'none' }}>{amount}</div>
-              </div>}
+              <div>{amount}</div>}
           </div>
         );
       })}

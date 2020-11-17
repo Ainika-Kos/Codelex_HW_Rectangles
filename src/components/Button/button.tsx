@@ -9,7 +9,7 @@ type Props = {
 
 export const Button: FC<Props> = ({ text, onClick }) => {
   return (
-    <div className="container">
+    <div>
       <button
         type="button"
         onClick={onClick}
