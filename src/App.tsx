@@ -18,6 +18,12 @@ const ColorApp = () => {
     return input.split('').map((item) => item.toLocaleLowerCase()).join('');
   };
 
+  const realColor = (input: string) => {
+    const s = new Option().style;
+    s.color = input;
+    return s.color !== '';
+  };
+
   const deleteRectangleHandler = (id: number) => {
     const index = rectangles.findIndex((item) => item.id === id);
     const newRectangles = [...rectangles];
@@ -38,7 +44,7 @@ const ColorApp = () => {
         <Button
           text="Add"
           onClick={() => {
-            if (inputColor) {
+            if (inputColor && realColor(inputColor)) {
               if (rectangles.some(({ color }) => color === inputColor)) {
                 const index = rectangles
                   .findIndex(({ color }) => color === inputColor);
